@@ -1,26 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
+import Login from './views/Login';
+import Register from './views/Register';
+import Main from './views/Main'
 import './App.css';
+import {  Route, Switch, useHistory } from 'react-router-dom';
 
 function App() {
+
+  let history = useHistory();
+
+  const checkLocal = () => {
+    if (localStorage.getItem('exchangetoken')) {
+      history.push('/main')
+    }else {
+      history.push('/')
+    }
+  };
+
+  React.useEffect(checkLocal, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+        <Switch>
+          <Route path="/" exact>
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/main">
+            <Main />
+          </Route>
+        </Switch>
+
     </div>
-  );
-}
+  )
+
+};
 
 export default App;
