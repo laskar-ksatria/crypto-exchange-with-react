@@ -21,7 +21,7 @@ function FormLimit() {
             let data = {price, amount, order_type, pair: 'btcusd', first_currency: 'btc', second_currency: 'usd'};
             createLimitOrder(data)
                 .then(data => {
-                    alert(data.message);
+                   
                 })
                 .catch(err => alert("Oopps, something wrong"))
         }else {
@@ -32,10 +32,8 @@ function FormLimit() {
     const getAllLimitTrades = () => {
         getLimitOrder('btcusd')
             .then(data => {
-                console.log(data)
                 let { buy, sell } = generateLimitTrade(data);
                 setTradeList({buy, sell})
-
             }).catch(err => alert("Oops something wrong"))
     };
 
@@ -47,11 +45,11 @@ function FormLimit() {
             let { buy, sell } = generateSocketData(data);
             let { order_type } = data;
             if (order_type === 'buy') {
-                setTradeList(prevState => ({...prevState, buy: buy}))
+                setTradeList(prevState => ({...prevState, buy: buy.sort(function(a, b){return a.price - b.price})}))
             }else if (order_type === 'sell') {
-                setTradeList(prevState => ({...prevState, sell: sell}))
-            }else {
-                setLimitData({buy: buy, sell: sell});
+                setTradeList(prevState => ({...prevState, sell: sell.sort(function(a, b){return a.price - b.price})}))
+            }else if (order_type === 'all'){
+                setTradeList({buy: buy, sell: sell});
             }
         })
     },[ENDPOINT])
