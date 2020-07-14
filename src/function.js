@@ -43,14 +43,17 @@ export const getAccount = () => {
                 jwttoken: localStorage.getItem('exchangetoken')
             }
         })
-        .then(({data}) => res(data))
+        .then(({data}) => {
+            console.log(data);
+            res(data)
+        })
         .catch(err => rej(err))
     })
 };
 
-export const getPrice = (currency) => {
+export const getPrice = (first_currency, second_currency) => {
     return new Promise((res,rej) => {
-        axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${currency}&tsyms=USD`)
+        axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${first_currency}&tsyms=${second_currency}`)
             .then(({data}) => {
                 res(data)
             })
@@ -58,7 +61,7 @@ export const getPrice = (currency) => {
     })
 };
 
-export const createLimitOrder = (data) => {
+export const createLimitOrder = (data, cb) => {
     let { amount, price, order_type, first_currency, second_currency, pair } = data
     return new Promise((res,rej) => {
         axios({
@@ -70,6 +73,7 @@ export const createLimitOrder = (data) => {
             }
         })
         .then(({data}) => {
+            cb()
             res(data)
         })
         .catch(rej)

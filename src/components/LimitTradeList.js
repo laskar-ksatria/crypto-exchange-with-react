@@ -10,7 +10,7 @@ function LimitTradeList(props) {
                 <td>Filled</td>
             </tr>
         </thead>
-        <tbody>
+        <tbody style={{background: 'whitesmoke'}}>
             {props.tradeList.buy.map((item, index) => {
                 if (item) {
                     return (
