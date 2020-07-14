@@ -7,19 +7,21 @@ function PriceCard() {
 
     const [apperance, setApperance] = React.useState({currentPrice: null, lastPrice: null, textColor: "gray", backColor: "whitesmoke"});
 
-    React.useEffect(() => {
-        if (apperance.currentPrice === null) {
-            setApperance(prev => ({...prev, currentPrice: state.marketPrice }))
-        }else {
-            let { currentPrice} = apperance;
-            setApperance(prev => ({...prev, currentPrice: state.marketPrice, lastPrice: currentPrice}))
-            if (state.marketPrice < currentPrice) {
-                setApperance(prev => ({...prev, textColor: 'yellow', backColor: 'red'}))
+    const getChange = () => {
+            if (apperance.currentPrice === null) {
+                setApperance(prev => ({...prev, currentPrice: state.marketPrice }))
             }else {
-                setApperance(prev => ({...prev, textColor: 'whitesmoke', backColor: 'green'}))
+                let { currentPrice} = apperance;
+                setApperance(prev => ({...prev, currentPrice: state.marketPrice, lastPrice: currentPrice}))
+                if (state.marketPrice < currentPrice) {
+                    setApperance(prev => ({...prev, textColor: 'yellow', backColor: 'red'}))
+                }else {
+                    setApperance(prev => ({...prev, textColor: 'whitesmoke', backColor: 'green'}))
+                }
             }
-        }
-    },[state])
+    }
+
+    React.useEffect(getChange,[state])
 
     return (
         <div style={{width: '100%', display: 'flex', justifyContent: 'center', marginTop: '30px'}}>

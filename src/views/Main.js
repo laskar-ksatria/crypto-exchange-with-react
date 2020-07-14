@@ -25,7 +25,7 @@ function Main() {
 
     React.useEffect(pricing, []);
 
-    React.useEffect(() => {
+    const getWebSocket = () => {
         const client = new w3cwebsocket(ENDPOINT + '?api_key=' + process.env.REACT_APP_WEBSOCKET_APIKEY);
         client.onopen = () => {
             let subRequest = {
@@ -41,7 +41,9 @@ function Main() {
                 setMarketPrice(data.PRICE)
             }
         }
-    },[ENDPOINT])
+    }
+
+    React.useEffect(getWebSocket,[ENDPOINT])
     
 
     return (
