@@ -16,8 +16,8 @@ function LimitTradeList(props) {
                     return (
                         <tr key={index}>
                             <td>{item.price}</td>
-                            <td>{item.amount}</td>
-                            <td>{item.filled}</td>
+                            <td>{(item.amount).toFixed(2)}</td>
+                            <td>{(item.filled).toFixed(2)}</td>
                         </tr>
                     )
                 }else {
@@ -42,8 +42,8 @@ function LimitTradeList(props) {
                     return (
                         <tr key={index}>
                             <td>{item.price}</td>
-                            <td>{item.amount}</td>
-                            <td>{item.filled}</td>
+                            <td>{(item.amount).toFixed(2)}</td>
+                            <td>{(item.filled).toFixed(2)}</td>
                         </tr>
                     )
                 }else {
