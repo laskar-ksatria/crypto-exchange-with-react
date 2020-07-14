@@ -1,6 +1,7 @@
 import React from 'react';
 
 import FormLimit from './FormLimit';
+import FormMarket from './FormMarket';
 
 function Exchange() {
 
@@ -9,9 +10,7 @@ function Exchange() {
         <React.Fragment>
             <div style={{display: 'flex', width: '100%', justifyContent: 'space-around'}}>
                 <FormLimit />
-                <div>
-                    <h1>Market Trade</h1>
-                </div>
+                <FormMarket />
             </div>
         </React.Fragment>
     )

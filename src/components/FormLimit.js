@@ -61,8 +61,10 @@ function FormLimit() {
             <input placeholder="Price" name="price" onChange={handleChange} />
             <input placeholder="Amount" name="amount" onChange={handleChange} />
             <br />
-            <button type="button" onClick={() => orderLimit('buy')}>Buy</button>
-            <button type="button" onClick={() => orderLimit('sell')}>Sell</button>
+           <div style={{marginTop: '10px'}}>
+            <button style={{width: '60px', height: '25px' ,cursor: 'pointer', background: 'green', color: 'white'}} type="button" onClick={() => orderLimit('buy')}>Buy</button>
+                <button style={{width: '60px', height: '25px' ,cursor: 'pointer', background: 'red', color: 'yellow'}} type="button" onClick={() => orderLimit('sell')}>Sell</button>
+           </div>
            <div style={{width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '30px'}}>
                 <div>
                     <LimitTradeList tradeList={tradeList} />
