@@ -48,9 +48,9 @@ export const getAccount = () => {
     })
 };
 
-export const getPrice = (currency) => {
+export const getPrice = (first_currency, second_currency) => {
     return new Promise((res,rej) => {
-        axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${currency}&tsyms=USD`)
+        axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${first_currency}&tsyms=${second_currency}`)
             .then(({data}) => {
                 res(data)
             })
