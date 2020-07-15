@@ -4,6 +4,7 @@ import Register from './views/Register';
 import Main from './views/Main'
 import './App.css';
 import {  Route, Switch, useHistory, useLocation } from 'react-router-dom';
+import Loop from './views/Loop';
 
 function App() {
 
@@ -12,7 +13,7 @@ function App() {
 
   const checkLocal = () => {
     if (localStorage.getItem('exchangetoken')) {
-      history.push('/main')
+      history.push(location.pathname)
     }else {
       if (location.pathname === '/' | location.pathname === '/register') {
         history.push(location.pathname);
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route path="/main">
             <Main />
+          </Route>
+          <Route path="/loop">
+            <Loop />
           </Route>
         </Switch>
     </div>

@@ -4,19 +4,35 @@ import FormLimit from './FormLimit';
 import FormMarket from './FormMarket';
 import PriceCard from './PriceCard';
 import { getAccount } from '../function';
+import Socket from 'socket.io-client';
+let Io
 
 function Exchange() {
+
+    const ENDPOINT = process.env.REACT_APP_BASE_URL
+    // const ENDPOINT = 'http://localhost:3050'
 
     const [myData, setMyData] = React.useState(null)
 
     const getMyAccount = () => {
         getAccount().then(data => {
-            console.log(data);
             setMyData(data)
         })
     };
 
-    React.useEffect(getMyAccount, []) 
+    const getSocket = () => {
+        Io = Socket(ENDPOINT);
+        if (myData) {
+            Io.on(`${myData.user}-btcusd`, data => {
+                setMyData(data);
+            })
+        }
+        return () => {
+            Io.emit('disconnected')
+        }
+    }
+    React.useEffect(getMyAccount, []);
+    React.useEffect(getSocket,[ENDPOINT, myData])
 
     return (
         <React.Fragment>
@@ -25,7 +41,7 @@ function Exchange() {
             <h3>USD: ${myData ? myData.balance : ""}</h3>
             <button type="button" onClick={getMyAccount}>Get</button>
             <div style={{display: 'flex', width: '100%', justifyContent: 'space-around'}}>
-                <FormLimit getMyAccount={getMyAccount} />
+                <FormLimit />
                 <FormMarket />
             </div>
         </React.Fragment>
