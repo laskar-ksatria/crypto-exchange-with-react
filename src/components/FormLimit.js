@@ -22,25 +22,25 @@ function FormLimit({ getMyAccount }) {
         if (limitData.price && limitData.amount) {
             let { price, amount } = limitData;
             let data = {price, amount, order_type, pair: 'btcusd', first_currency: 'btc', second_currency: 'usd'};
-            let valid = true;
-            if (order_type === 'buy') {
-                if (price > marketPrice) {
-                    valid = false;
-                    alert('Price must be lower than market')
-                }
-            }else if (order_type === 'sell') {
-                if (price < marketPrice) {
-                    valid = false
-                    alert('price must be higher than market')
-                }
-            }
-            if (valid) {
+            // let valid = true;
+            // if (order_type === 'buy') {
+            //     if (price > marketPrice) {
+            //         // valid = false;
+            //         alert('Price must be lower than market')
+            //     }
+            // }else if (order_type === 'sell') {
+            //     if (price < marketPrice) {
+            //         // valid = false
+            //         alert('price must be higher than market')
+            //     }
+            // }
+            // if (valid) {
                 createLimitOrder(data, getMyAccount)
                 .then(data => {
                     console.log(data);
                 })
-                .catch(err => alert("Oopps, something wrong"))
-            }
+                .catch(console.log)
+            // }
         }else {
             alert(`Price and amount cannot be empty`)
         }
