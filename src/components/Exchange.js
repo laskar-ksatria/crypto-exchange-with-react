@@ -3,29 +3,38 @@ import React from 'react';
 import FormLimit from './FormLimit';
 import FormMarket from './FormMarket';
 import PriceCard from './PriceCard';
-import { getAccount } from '../function';
+import Socket from 'socket.io-client';
+let Io
 
-function Exchange() {
+function Exchange({ myAccount }) {
 
-    const [myData, setMyData] = React.useState(null)
+    const ENDPOINT = process.env.REACT_APP_BASE_URL
+    
+    const [Account, setAccount] = React.useState(null);
 
-    const getMyAccount = () => {
-        getAccount().then(data => {
-            console.log(data);
-            setMyData(data)
-        })
-    };
+    React.useEffect(() => {
+        setAccount(myAccount);
+    },[myAccount])
 
-    React.useEffect(getMyAccount, []) 
+    React.useEffect(() => {
+        Io = Socket(ENDPOINT);  
+            console.log(myAccount.user);
+            Io.on(`${myAccount.user}-btcusd`, data => {
+                alert("Masuk");
+                console.log(data);
+                setAccount(data);
+            })
+    },[ENDPOINT, myAccount])
+
 
     return (
         <React.Fragment>
             <PriceCard />
-            <h3>BTC: {myData ? myData.BTC_coin : ""}</h3>
-            <h3>USD: ${myData ? myData.balance : ""}</h3>
-            <button type="button" onClick={getMyAccount}>Get</button>
+            <h3>BTC: {Account ? Account.BTC_coin : ""}</h3>
+            <h3>USD: ${Account ? Account.balance : ""}</h3>
+            <button type="button">Get</button>
             <div style={{display: 'flex', width: '100%', justifyContent: 'space-around'}}>
-                <FormLimit getMyAccount={getMyAccount} />
+                <FormLimit />
                 <FormMarket />
             </div>
         </React.Fragment>

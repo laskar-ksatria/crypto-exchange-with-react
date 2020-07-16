@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Exchange from '../components/Exchange';
 import { w3cwebsocket } from 'websocket';
-import { getPrice } from '../function'
+import { getPrice, getAccount } from '../function'
 
 // const client = new w3cwebsocket('wss://streamer.cryptocompare.com/v2?api_key=' + process.env.REACT_APP_WEBSOCKET_APIKEY);
 
@@ -16,6 +16,16 @@ function Main() {
 
     const [marketPrice, setMarketPrice] = React.useState(null);
 
+    const [myAccount, setMyAccount] = React.useState(null);
+
+    const getMyAccount = () => {
+        getAccount()
+            .then(data => {
+                setMyAccount(data)
+            })
+            .catch(err => alert('Upps something wrong'))
+    }
+
     const pricing = () => {
         getPrice(marketPair[0], marketPair[1])
             .then(data => {
@@ -24,6 +34,7 @@ function Main() {
     };
 
     React.useEffect(pricing, []);
+    React.useEffect(getMyAccount, []);
 
     const getWebSocket = () => {
         const client = new w3cwebsocket(ENDPOINT + '?api_key=' + process.env.REACT_APP_WEBSOCKET_APIKEY);
@@ -50,7 +61,7 @@ function Main() {
         <div>
             <Header />
             <priceContext.Provider value={{marketPrice}}>
-                <Exchange />
+                {myAccount ? <Exchange myAccount={myAccount} /> : "Loading..."}
             </priceContext.Provider>
         </div>
     )

@@ -61,7 +61,7 @@ export const getPrice = (first_currency, second_currency) => {
     })
 };
 
-export const createLimitOrder = (data, cb) => {
+export const createLimitOrder = (data) => {
     let { amount, price, order_type, first_currency, second_currency, pair } = data
     return new Promise((res,rej) => {
         axios({
@@ -73,7 +73,6 @@ export const createLimitOrder = (data, cb) => {
             }
         })
         .then(({data}) => {
-            cb()
             res(data)
         })
         .catch(rej)

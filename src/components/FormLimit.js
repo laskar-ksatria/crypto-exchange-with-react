@@ -5,7 +5,7 @@ import LimitTradeList from './LimitTradeList';
 import { priceContext } from '../views/Main'
 let Io;
 
-function FormLimit({ getMyAccount }) {
+function FormLimit() {
 
     const ENDPOINT = process.env.REACT_APP_BASE_URL;
 
@@ -35,11 +35,11 @@ function FormLimit({ getMyAccount }) {
             //     }
             // }
             // if (valid) {
-                createLimitOrder(data, getMyAccount)
+                createLimitOrder(data)
                 .then(data => {
                     console.log(data);
                 })
-                .catch(console.log)
+                .catch(err => alert("Oopps, something wrong"))
             // }
         }else {
             alert(`Price and amount cannot be empty`)
@@ -54,7 +54,6 @@ function FormLimit({ getMyAccount }) {
             }).catch(err => alert("Oops something wrong"))
     };
 
-    React.useEffect(getMyAccount, [])
 
     React.useEffect(getAllLimitTrades,[])
 
@@ -76,7 +75,6 @@ function FormLimit({ getMyAccount }) {
     return (
         <div style={{padding: '10px'}}>
             <h1>Limit Order</h1>
-            <button type="button" onClick={getMyAccount}>Get</button>
             <input placeholder="Price" name="price" onChange={handleChange} />
             <input placeholder="Amount" name="amount" onChange={handleChange} />
             <br />
