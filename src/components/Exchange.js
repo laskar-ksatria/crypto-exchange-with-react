@@ -20,7 +20,6 @@ function Exchange({ myAccount }) {
         Io = Socket(ENDPOINT);  
             console.log(myAccount.user);
             Io.on(`${myAccount.user}-btcusd`, data => {
-                alert("Masuk");
                 console.log(data);
                 setAccount(data);
             })

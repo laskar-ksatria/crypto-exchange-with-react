@@ -3,6 +3,14 @@ import axios from 'axios';
 
 const baseUrl = process.env.REACT_APP_BASE_URL
 
+export const inititalState = {
+    btc_price: null
+}
+
+const reducer = ((state, action) => {
+
+})
+
 export const register = (data) => {
     return new Promise((res,rej) => {
         axios({

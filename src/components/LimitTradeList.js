@@ -14,7 +14,7 @@ function LimitTradeList(props) {
             {props.tradeList.buy.map((item, index) => {
                 if (item) {
                     return (
-                        <tr key={index}>
+                        <tr key={index} style={{fontWeight: 'bolder', cursor: 'pointer'}}>
                             <td>{item.price}</td>
                             <td>{(item.amount).toFixed(2)}</td>
                             <td>{(item.filled).toFixed(2)}</td>
@@ -40,7 +40,7 @@ function LimitTradeList(props) {
             {props.tradeList.sell.map((item, index) => {
                 if (item) {
                     return (
-                        <tr key={index}>
+                        <tr key={index} style={{fontWeight: 'bolder',cursor: 'pointer'}}>
                             <td>{item.price}</td>
                             <td>{(item.amount).toFixed(2)}</td>
                             <td>{(item.filled).toFixed(2)}</td>
