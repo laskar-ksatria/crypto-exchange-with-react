@@ -5,7 +5,6 @@ function FormMarket() {
     return (
         <div>
             <h1>Market Trade</h1>
-            <input placeholder="Price" />
             <input placeholder="Amount" />
             <br />
            <div style={{marginTop: '10px'}}>

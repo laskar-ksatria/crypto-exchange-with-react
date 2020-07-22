@@ -21,7 +21,9 @@ function FormLimit() {
     const orderLimit = (order_type) => {
         if (limitData.price && limitData.amount) {
             let { price, amount } = limitData;
+
             let data = {price, amount, order_type, pair: 'btcusd', first_currency: 'btc', second_currency: 'usd'};
+            
                 createLimitOrder(data)
                 .then(data => {
                     console.log(data);
