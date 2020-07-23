@@ -1,15 +1,34 @@
 import axios from 'axios';
-
+import { GET_USER } from './type'
 
 const baseUrl = process.env.REACT_APP_BASE_URL
 
 export const inititalState = {
-    btc_price: null
+    user: null
 }
 
-const reducer = ((state, action) => {
-
+export const reducer = ((state, action) => {
+    switch (action.type) {
+        case GET_USER:
+            return {...state, user: action.data}
+        default:
+            return state;
+    }
 })
+
+
+export const getUserData = (dispatch) => {
+    axios({
+        url: 'http://localhost:3050' + '/users/myAccount',
+        method: 'GET',
+        headers: {
+            jwttoken: localStorage.getItem('exchangetoken')
+        }
+    })
+    .then(({data}) => {
+        dispatch({type: GET_USER, data})
+    })
+}
 
 export const register = (data) => {
     return new Promise((res,rej) => {

@@ -2,14 +2,16 @@ import React from 'react';
 import Header from '../components/Header';
 import Exchange from '../components/Exchange';
 import { w3cwebsocket } from 'websocket';
-import { getPrice, getAccount } from '../function'
+import { getPrice, getUserData, getAccount } from '../function'
 import Chat from '../components/Chat'
-
 // const client = new w3cwebsocket('wss://streamer.cryptocompare.com/v2?api_key=' + process.env.REACT_APP_WEBSOCKET_APIKEY);
+import { UserContext } from '../App'
 
 export const priceContext = React.createContext();
 
 function Main() {
+
+    let { dispatch } = React.useContext(UserContext) 
 
     const ENDPOINT = 'wss://streamer.cryptocompare.com/v2';
 
@@ -20,11 +22,11 @@ function Main() {
     const [myAccount, setMyAccount] = React.useState(null);
 
     const getMyAccount = () => {
-        getAccount()
-            .then(data => {
-                setMyAccount(data)
-            })
-            .catch(err => alert('Upps something wrong'))
+       getAccount()
+       .then(data => {
+            setMyAccount(data)
+        })
+        .catch(err => alert('Upps something wrong'))
     }
 
     const pricing = () => {
@@ -34,8 +36,13 @@ function Main() {
             })
     };
 
+    const getMyData = () => {
+        getUserData(dispatch)
+    };
+
     React.useEffect(pricing, []);
     React.useEffect(getMyAccount, []);
+    React.useEffect(getMyData, []);
 
     const getWebSocket = () => {
         const client = new w3cwebsocket(ENDPOINT + '?api_key=' + process.env.REACT_APP_WEBSOCKET_APIKEY);
@@ -63,7 +70,7 @@ function Main() {
             <Header />
             <priceContext.Provider value={{marketPrice}}>
                 {myAccount ? <Exchange myAccount={myAccount} /> : "Loading..."}
-                <Chat />
+                {/* <Chat /> */}
             </priceContext.Provider>
         </div>
     )

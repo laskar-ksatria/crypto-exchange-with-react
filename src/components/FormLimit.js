@@ -3,6 +3,7 @@ import { createLimitOrder, generateSocketData, generateLimitTrade, getLimitOrder
 import Socket from 'socket.io-client';
 import LimitTradeList from './LimitTradeList';
 import { priceContext } from '../views/Main'
+import MyLimit from './MyLimit';
 let Io;
 
 function FormLimit() {
@@ -58,6 +59,7 @@ function FormLimit() {
                 setTradeList({buy: buy, sell: sell});
             }
         })
+
     },[ENDPOINT])
 
     return (
@@ -75,6 +77,7 @@ function FormLimit() {
                     <LimitTradeList tradeList={tradeList} />
                 </div>
            </div>
+           <MyLimit />
         </div>
     )
 

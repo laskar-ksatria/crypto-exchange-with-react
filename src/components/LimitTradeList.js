@@ -1,6 +1,9 @@
 import React from 'react';
 
 function LimitTradeList(props) {
+
+
+
     return (
         <table style={{width: '250px', border: '1px solid grey'}}>
         <thead style={{color: 'white', backgroundColor: 'blue'}}>
@@ -11,6 +14,8 @@ function LimitTradeList(props) {
             </tr>
         </thead>
         <tbody style={{background: 'whitesmoke'}}>
+
+            {/* BUY  */}
             {props.tradeList.buy.map((item, index) => {
                 if (item) {
                     return (
@@ -37,6 +42,8 @@ function LimitTradeList(props) {
                 <td></td>
                 <td></td>
             </tr>
+
+            {/* SELL  */}
             {props.tradeList.sell.map((item, index) => {
                 if (item) {
                     return (
