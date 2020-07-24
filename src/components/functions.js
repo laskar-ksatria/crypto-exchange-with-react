@@ -1,7 +1,7 @@
 import axios from 'axios';
 import cogoToast from 'cogo-toast';
 
-const baseUrl = 'http://localhost:3050'
+const baseUrl = 'http://45.76.191.49'
 
 export const getMyLimit = () => {
     return new Promise((res, rej) => {
@@ -41,7 +41,6 @@ export const deleteMyLimit = (id, pair, cb) => {
             }
         })
         .then(({data}) => {
-           alert(data.message)
            cb();
         })
         .catch(err => alert(err.response.data.message))

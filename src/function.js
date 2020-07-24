@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { GET_USER } from './type'
 
-const baseUrl = process.env.REACT_APP_BASE_URL
+const baseUrl = 'http://45.76.191.49'
+
 
 export const inititalState = {
     user: null
@@ -19,7 +20,7 @@ export const reducer = ((state, action) => {
 
 export const getUserData = (dispatch) => {
     axios({
-        url: 'http://localhost:3050' + '/users/myAccount',
+        url: 'http://45.76.191.49' + '/users/myAccount',
         method: 'GET',
         headers: {
             jwttoken: localStorage.getItem('exchangetoken')
@@ -52,7 +53,7 @@ export const logout = (cb) => {
 export const login = (data) => {
     return new Promise((res,rej) => {
         axios({
-            url: process.env.REACT_APP_BASE_URL + '/users/login',
+            url: 'http://45.76.191.49' + '/users/login',
             method: 'POST',
             data: data
         })
@@ -64,7 +65,7 @@ export const login = (data) => {
 export const getAccount = () => {
     return new Promise((res,rej) => {
         axios({
-            url: process.env.REACT_APP_BASE_URL + '/account',
+            url: 'http://45.76.191.49' + '/account',
             method: 'GET',
             headers: {
                 jwttoken: localStorage.getItem('exchangetoken')

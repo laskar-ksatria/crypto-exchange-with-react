@@ -8,7 +8,7 @@ let Io;
 
 function FormLimit() {
 
-    const ENDPOINT = process.env.REACT_APP_BASE_URL;
+    const ENDPOINT = 'http://45.76.191.49';
 
     const { marketPrice } = React.useContext(priceContext)
 
